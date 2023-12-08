@@ -7,6 +7,8 @@ import dev.jab125.configfixer.api.instruction.ModifyJsonInstruction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ConfigfixerTest {
@@ -53,5 +55,11 @@ public class ConfigfixerTest {
                 "-  \"doAnimalsBreedInWinter\": true\n" +
                 "+  \"doAnimalsBreedInWinter\": false\n" +
                 " }\n",  modifyJsonInstruction.diff().get("seasons.json"));
+    }
+
+    @Test
+    public void testModificationsJson() throws IOException {
+        Context context = Context.createContext(Paths.get("build/resources/test/original"), Paths.get("build/resources/test/modified"), Paths.get("build/resources/test/clean"));
+        context.run(new Gson().fromJson(new String(Files.readAllBytes(Paths.get("build/resources/test/modifications.json"))), JsonObject.class));
     }
 }

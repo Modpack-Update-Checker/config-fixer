@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "config-fixer-test:modifications",
+  "instructions": [
+    {
+      "id": "c:modify_json_values",
+      "file": "bcc.json",
+      "override": {
+        "modpackVersion": "v16"
+      }
+    },
+    {
+      "id": "c:modify_json_values",
+      "file": "sodium-options.json",
+      "override": {
+        "notifications.hide_donation_button": false
+      }
+    }
+  ]
+}
