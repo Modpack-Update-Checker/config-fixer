@@ -7,10 +7,17 @@ version '0.1.0'
 
 repositories {
     mavenCentral()
+    maven {
+        url = "https://maven.covers1624.net/" // for DiffPatch
+    }
 }
 
+
+// TODO SHADE EVERYTHING BESIDES GSON
 dependencies {
+    implementation 'codechicken:DiffPatch:1.5.0.29' // diffpatch uses java 8 so we're good
     implementation 'com.google.code.gson:gson:2.8.0' // use old version of GSON for maximum support.
+    implementation 'com.jayway.jsonpath:json-path:2.8.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
