@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 public class ConfigfixerTest {
     @Test
     public void testModifyJson() {
-        System.out.println(Paths.get("original").toAbsolutePath());
         Context context = Context.createContext(Paths.get("build/resources/test/original"), Paths.get("build/resources/test/modified"), Paths.get("build/resources/test/clean"));
         ModifyJsonInstruction modifyJsonInstruction = new ModifyJsonInstruction(context, new Gson().fromJson("{\n" +
                 "  \"file\":" +
