@@ -41,10 +41,12 @@ public class ModifyJsonInstruction extends AbstractSingularFileInstruction<Modif
     }
 
     private void writeJsonFile(JsonElement element, String file) {
+        context.modifiedPath(file).toFile().getParentFile().mkdirs();
         shut(() -> Files.write(context.modifiedPath(file), GSON.toJson(element).getBytes(StandardCharsets.UTF_8)));
     }
 
     private void cleanJsonFile(JsonElement element, String file) {
+        context.cleanedPath(file).toFile().getParentFile().mkdirs();
         shut(() -> Files.write(context.cleanedPath(file), GSON.toJson(element).getBytes(StandardCharsets.UTF_8)));
     }
 
