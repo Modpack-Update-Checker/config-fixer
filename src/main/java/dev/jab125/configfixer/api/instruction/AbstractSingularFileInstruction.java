@@ -9,6 +9,7 @@ import dev.jab125.configfixer.api.Context;
 import dev.jab125.configfixer.impl.ThrowableSupplier;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,20 @@ public abstract class AbstractSingularFileInstruction<T extends AbstractSingular
     @Override
     public Map<String, String> diff() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        shut(() -> DiffOperation.builder().autoHeader(false).summary(false).aPath(context.cleanedPath(file)).bPath(context.modifiedPath(file)).outputPath(new OutputPath.PipePath(outputStream, null)).build().operate());
+        shut(() -> DiffOperation.builder().autoHeader(false).lineEnding("\n").summary(false).aPath(context.cleanedPath(file)).bPath(context.modifiedPath(file)).outputPath(new OutputPath.PipePath(outputStream, null)).build().operate());
         HashMap<String, String> map = new HashMap<>();
-        map.put(file, outputStream.toString());
+        map.put(file, strip(outputStream.toString()));
         return map;
+    }
+
+    private String strip(String string) {
+        String[] split = string.split("\n");
+        String sf = "";
+        int i = 0;
+        for (String s : split) {
+            if (i <= 2); else sf += s + "\n";
+            i++;
+        }
+        return sf;
     }
 }
